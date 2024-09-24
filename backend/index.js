@@ -62,6 +62,8 @@ app.put('/completed', async (req, res) => {
     });
     return;
   }
+
+  //if todo.completed is  true then below code will run
   if (updatePayload.bool) {
     try {
       await Todo.updateOne({ _id: updatePayload.id }, { $set: { completed: false } });
@@ -70,6 +72,7 @@ app.put('/completed', async (req, res) => {
       res.status(500).json({ msg: "Error updating todo", error });
     }
   }
+  //if todo.completed is  false then below code will run
   else {
     try {
       await Todo.updateOne({ _id: updatePayload.id }, { $set: { completed: true } });
@@ -80,6 +83,7 @@ app.put('/completed', async (req, res) => {
   }
 });
 
+// for deleting todo
 app.delete('/delete/:id', async (req, res) => {
   const { id } = req.params
   try {
